@@ -11,7 +11,6 @@
  *     gasPrice: 10000000000,
  *   },
  */
-
 require('dotenv').config();
 const Web3 = require("web3");
 const web3 = new Web3();
@@ -39,7 +38,7 @@ module.exports = {
       // truffle(rinkeby)> web3.eth.getBlock("pending", (error, result) =>
       //   console.log(result.gasLimit))
       gas: 4600000,
-      gasPrice: web3.toWei("20", "gwei"),
+      gasPrice: web3.utils.toWei("20", "gwei"),
       network_id: "3",
     }
   }

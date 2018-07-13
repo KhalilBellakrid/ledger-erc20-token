@@ -1,0 +1,606 @@
+{
+  "contractName": "LedgerPullPayment",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalPayments",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "withdrawPayments",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "payments",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "savePayment",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5061036d806100206000396000f300608060405260043610610061576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680625b4487146100665780636103d70b14610091578063d539d80d146100a8578063e2982c21146100b2575b600080fd5b34801561007257600080fd5b5061007b610109565b6040518082815260200191505060405180910390f35b34801561009d57600080fd5b506100a661010f565b005b6100b0610236565b005b3480156100be57600080fd5b506100f3600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610242565b6040518082815260200191505060405180910390f35b60015481565b6000803391506000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490506000811415151561016657600080fd5b803073ffffffffffffffffffffffffffffffffffffffff16311015151561018c57600080fd5b6101a18160015461025a90919063ffffffff16565b60018190555060008060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508173ffffffffffffffffffffffffffffffffffffffff166108fc829081150290604051600060405180830381858888f19350505050158015610231573d6000803e3d6000fd5b505050565b6102403334610273565b565b60006020528060005260406000206000915090505481565b600082821115151561026857fe5b818303905092915050565b6102c4816000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205461032590919063ffffffff16565b6000808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555061031b8160015461032590919063ffffffff16565b6001819055505050565b6000818301905082811015151561033857fe5b809050929150505600a165627a7a723058204101c4748c27bb1a64c836c62a7d13beca5160a4950539ccc7897cb6a024b2470029",
+  "deployedBytecode": "0x608060405260043610610061576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680625b4487146100665780636103d70b14610091578063d539d80d146100a8578063e2982c21146100b2575b600080fd5b34801561007257600080fd5b5061007b610109565b6040518082815260200191505060405180910390f35b34801561009d57600080fd5b506100a661010f565b005b6100b0610236565b005b3480156100be57600080fd5b506100f3600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610242565b6040518082815260200191505060405180910390f35b60015481565b6000803391506000808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205490506000811415151561016657600080fd5b803073ffffffffffffffffffffffffffffffffffffffff16311015151561018c57600080fd5b6101a18160015461025a90919063ffffffff16565b60018190555060008060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508173ffffffffffffffffffffffffffffffffffffffff166108fc829081150290604051600060405180830381858888f19350505050158015610231573d6000803e3d6000fd5b505050565b6102403334610273565b565b60006020528060005260406000206000915090505481565b600082821115151561026857fe5b818303905092915050565b6102c4816000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205461032590919063ffffffff16565b6000808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000208190555061031b8160015461032590919063ffffffff16565b6001819055505050565b6000818301905082811015151561033857fe5b809050929150505600a165627a7a723058204101c4748c27bb1a64c836c62a7d13beca5160a4950539ccc7897cb6a024b2470029",
+  "sourceMap": "110:170:1:-;;;156:26;8:9:-1;5:2;;;30:1;27;20:12;5:2;156:26:1;110:170;;;;;;",
+  "deployedSourceMap": "110:170:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;333:28:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;333:28:3;;;;;;;;;;;;;;;;;;;;;;;433:290;;8:9:-1;5:2;;;30:1;27;20:12;5:2;433:290:3;;;;;;185:93:1;;;;;;286:43:3;;8:9:-1;5:2;;;30:1;27;20:12;5:2;286:43:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;333:28;;;;:::o;433:290::-;474:13;506:15;490:10;474:26;;524:8;:15;533:5;524:15;;;;;;;;;;;;;;;;506:33;;565:1;554:7;:12;;546:21;;;;;;;;606:7;589:4;581:21;;;:32;;573:41;;;;;;;;637:26;655:7;637:13;;:17;;:26;;;;:::i;:::-;621:13;:42;;;;687:1;669:8;:15;678:5;669:15;;;;;;;;;;;;;;;:19;;;;695:5;:14;;:23;710:7;695:23;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;695:23:3;433:290;;:::o;185:93:1:-;229:44;251:10;263:9;229:21;:44::i;:::-;185:93::o;286:43:3:-;;;;;;;;;;;;;;;;;:::o;1042:110:2:-;1100:7;1127:1;1122;:6;;1115:14;;;;;;1146:1;1142;:5;1135:12;;1042:110;;;;:::o;912:159:3:-;993:26;1012:6;993:8;:14;1002:4;993:14;;;;;;;;;;;;;;;;:18;;:26;;;;:::i;:::-;976:8;:14;985:4;976:14;;;;;;;;;;;;;;;:43;;;;1041:25;1059:6;1041:13;;:17;;:25;;;;:::i;:::-;1025:13;:41;;;;912:159;;:::o;1214:123:2:-;1272:9;1297:1;1293;:5;1289:9;;1316:1;1311;:6;;1304:14;;;;;;1331:1;1324:8;;1214:123;;;;:::o",
+  "source": "pragma solidity ^0.4.4;\nimport \"../../node_modules/openzeppelin-solidity/contracts/payment/PullPayment.sol\";\n\ncontract LedgerPullPayment is PullPayment {\n  constructor() public {\n  }\n  function savePayment() public payable {\n    PullPayment.asyncSend(msg.sender, msg.value);\n  }\n}\n",
+  "sourcePath": "/Users/elkhalilbellakrid/Desktop/Playground_14/ledger-erc20-token/dumb-withdraw/contracts/TestPullPayment.sol",
+  "ast": {
+    "absolutePath": "/Users/elkhalilbellakrid/Desktop/Playground_14/ledger-erc20-token/dumb-withdraw/contracts/TestPullPayment.sol",
+    "exportedSymbols": {
+      "LedgerPullPayment": [
+        79
+      ]
+    },
+    "id": 80,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "absolutePath": "/Users/elkhalilbellakrid/Desktop/Playground_14/ledger-erc20-token/node_modules/openzeppelin-solidity/contracts/payment/PullPayment.sol",
+        "file": "../../node_modules/openzeppelin-solidity/contracts/payment/PullPayment.sol",
+        "id": 59,
+        "nodeType": "ImportDirective",
+        "scope": 80,
+        "sourceUnit": 262,
+        "src": "24:84:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 60,
+              "name": "PullPayment",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 261,
+              "src": "140:11:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PullPayment_$261",
+                "typeString": "contract PullPayment"
+              }
+            },
+            "id": 61,
+            "nodeType": "InheritanceSpecifier",
+            "src": "140:11:1"
+          }
+        ],
+        "contractDependencies": [
+          261
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 79,
+        "linearizedBaseContracts": [
+          79,
+          261
+        ],
+        "name": "LedgerPullPayment",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 64,
+              "nodeType": "Block",
+              "src": "177:5:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 65,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 62,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "167:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 63,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "177:0:1"
+            },
+            "scope": 79,
+            "src": "156:26:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 77,
+              "nodeType": "Block",
+              "src": "223:55:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 71,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 276,
+                          "src": "251:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 72,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "251:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 73,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 276,
+                          "src": "263:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 74,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "value",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "263:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 68,
+                        "name": "PullPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 261,
+                        "src": "229:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_PullPayment_$261_$",
+                          "typeString": "type(contract PullPayment)"
+                        }
+                      },
+                      "id": 70,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "asyncSend",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 260,
+                      "src": "229:21:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,uint256)"
+                      }
+                    },
+                    "id": 75,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "229:44:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 76,
+                  "nodeType": "ExpressionStatement",
+                  "src": "229:44:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 78,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "savePayment",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 66,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "205:2:1"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 67,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "223:0:1"
+            },
+            "scope": 79,
+            "src": "185:93:1",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 80,
+        "src": "110:170:1"
+      }
+    ],
+    "src": "0:281:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/elkhalilbellakrid/Desktop/Playground_14/ledger-erc20-token/dumb-withdraw/contracts/TestPullPayment.sol",
+    "exportedSymbols": {
+      "LedgerPullPayment": [
+        79
+      ]
+    },
+    "id": 80,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:1"
+      },
+      {
+        "absolutePath": "/Users/elkhalilbellakrid/Desktop/Playground_14/ledger-erc20-token/node_modules/openzeppelin-solidity/contracts/payment/PullPayment.sol",
+        "file": "../../node_modules/openzeppelin-solidity/contracts/payment/PullPayment.sol",
+        "id": 59,
+        "nodeType": "ImportDirective",
+        "scope": 80,
+        "sourceUnit": 262,
+        "src": "24:84:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 60,
+              "name": "PullPayment",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 261,
+              "src": "140:11:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PullPayment_$261",
+                "typeString": "contract PullPayment"
+              }
+            },
+            "id": 61,
+            "nodeType": "InheritanceSpecifier",
+            "src": "140:11:1"
+          }
+        ],
+        "contractDependencies": [
+          261
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 79,
+        "linearizedBaseContracts": [
+          79,
+          261
+        ],
+        "name": "LedgerPullPayment",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 64,
+              "nodeType": "Block",
+              "src": "177:5:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 65,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 62,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "167:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 63,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "177:0:1"
+            },
+            "scope": 79,
+            "src": "156:26:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 77,
+              "nodeType": "Block",
+              "src": "223:55:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 71,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 276,
+                          "src": "251:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 72,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "251:10:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 73,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 276,
+                          "src": "263:3:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 74,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "value",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "263:9:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 68,
+                        "name": "PullPayment",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 261,
+                        "src": "229:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_PullPayment_$261_$",
+                          "typeString": "type(contract PullPayment)"
+                        }
+                      },
+                      "id": 70,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "asyncSend",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 260,
+                      "src": "229:21:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,uint256)"
+                      }
+                    },
+                    "id": 75,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "229:44:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 76,
+                  "nodeType": "ExpressionStatement",
+                  "src": "229:44:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 78,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "savePayment",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 66,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "205:2:1"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 67,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "223:0:1"
+            },
+            "scope": 79,
+            "src": "185:93:1",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 80,
+        "src": "110:170:1"
+      }
+    ],
+    "src": "0:281:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0xc66054271a870e67713b59f030ff71ba2d421c22",
+      "transactionHash": "0x0357e1a539ab3c3e125041ff950fd87d399d6e49dc4d2654837a5dd2652222a9"
+    }
+  },
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-13T14:44:00.056Z"
+}
