@@ -1,14 +1,14 @@
-pragma solidity ^0.4.4;
-import "../../node_modules/openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
+pragma solidity ^0.5.0;
+import "../../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "../../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
-contract LedgerCoin is StandardToken {
-  string public name = "LedgerCoin";
-  string public symbol = "LGC";
-  uint public decimals = 2;
-  uint public INITIAL_SUPPLY = 10000 * (10 ** decimals);
+contract LedgerCoin is ERC20, ERC20Detailed {
+  string private _name = "LedgerLiveCoin";
+  string private _symbol = "LLGC";
+  uint8 private _decimals = 30;
+  uint private _INITIAL_SUPPLY = 10000000000000000000 * (10 ** 30);
 
-  constructor() public {
-    totalSupply_ = INITIAL_SUPPLY;
-    balances[msg.sender] = INITIAL_SUPPLY;
+  constructor() ERC20Detailed(_name, _symbol, _decimals) public {
+    _mint(msg.sender, _INITIAL_SUPPLY);
   }
 }
