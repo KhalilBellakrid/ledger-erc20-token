@@ -1,11 +1,13 @@
 require('dotenv').config();
+const fs = require('fs');
 const Web3 = require("web3");
 const web3 = new Web3();
 const WalletProvider = require("truffle-hdwallet-provider");
 const Wallet = require('ethereumjs-wallet');
 
-var ropstenPrivateKey = process.env["ROPSTEN_PRIVATE_KEY"];
-const infuraKey = process.env["INFURA_TOKEN"];
+const keys = JSON.parse(fs.readFileSync('.secret'));
+var ropstenPrivateKey = keys["ACCOUNT_PRIVATE_KEY"];
+const infuraKey = keys["INFURA_API_TOKEN"];
 var ropstenProvider = new WalletProvider(ropstenPrivateKey, `https://ropsten.infura.io/v3/${infuraKey}`);
 
 module.exports = {
@@ -21,7 +23,7 @@ module.exports = {
       // truffle deploy --network rinkeby
       // truffle(rinkeby)> web3.eth.getBlock("pending", (error, result) =>
       //   console.log(result.gasLimit))
-      gas: 4600000,
+      gas: 7000000, // should be inferior ro block gas limit ~8000000
       gasPrice: web3.utils.toWei("20", "gwei"),
       network_id: "3",
     }
