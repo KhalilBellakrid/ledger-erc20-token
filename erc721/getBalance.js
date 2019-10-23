@@ -14,9 +14,9 @@ const balanceOfAddress = async (address) => {
   const balance = await getBalance(address);
   console.log(`Address ${address} got balance: ${balance.toString()}`);
   const currentHeight = await web3.eth.getBlockNumber();
-  const events = await contract.getPastEvents("allEvents", {fromBlock: currentHeight - 2, toBlock: currentHeight})
+  const events = await contract.getPastEvents("allEvents", {fromBlock: currentHeight - 10, toBlock: currentHeight})
   console.log("Events received");
   console.log(events);
   return balance
 }
-balanceOfAddress(addressTo);
+balanceOfAddress(addressFrom);

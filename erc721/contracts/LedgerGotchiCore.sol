@@ -1,10 +1,10 @@
 pragma solidity ^0.5.0;
 //import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol";
-import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Mintable.sol";
-//import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+//import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Mintable.sol";
+import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
 //contract LedgerGotchiCore is ERC721Mintable, ERC721Full {
-contract LedgerGotchiCore {
+contract LedgerGotchiCore is ERC721 {
 
   // Constants
   //string private _name = "LedgerGotchi";
@@ -12,10 +12,10 @@ contract LedgerGotchiCore {
 
   // Events
   event Birth(address owner, uint256 gotchiId, uint256 gotchaId, uint256 gotchoId, uint256 genes);
-  event Transfer(address from, address to, uint256 gotchiId);
-  event Approval(address from, address to, uint256 gotchiId);
-  event StartMint(address to, uint256 gotchiId);
-  event Ownership(address to, uint256 ownership);
+  //event Transfer(address from, address to, uint256 gotchiId);
+  //event Approval(address from, address to, uint256 gotchiId);
+  //event StartMint(address to, uint256 gotchiId);
+  //event Ownership(address to, uint256 ownership);
 
   struct Gotchi {
         // Genes of gotchi
@@ -35,7 +35,7 @@ contract LedgerGotchiCore {
    mapping (uint256 => address) public gotchiIndexToApproved;
    address _minter;
 
-   constructor() public {
+   constructor() public ERC721() {
       _minter = msg.sender;
    }
 
@@ -51,11 +51,8 @@ contract LedgerGotchiCore {
     }
 
   function mint(address to, uint256 gotchiId) public returns (bool) {
-    emit StartMint(to, gotchiId);
     uint256 tmp = ownershipTokenCount[to];
-    emit Ownership(to, ownershipTokenCount[to]);
     _mint(to, gotchiId);
-    emit Ownership(to, ownershipTokenCount[to]);
     return tmp != ownershipTokenCount[to];
   }
 
@@ -68,7 +65,6 @@ contract LedgerGotchiCore {
               delete mingleAllowedToAddress[_gotchiId];
               delete gotchiIndexToApproved[_gotchiId];
           }
-          //gotchiIndexToApproved[_gotchiId] = _to;
           // Emit the transfer event.
           emit Transfer(_from, _to, _gotchiId);
     }
@@ -169,7 +165,9 @@ contract LedgerGotchiCore {
     function ownerOf(uint256 _gotchiId) public view returns (address owner) {
         owner = gotchiIndexToOwner[_gotchiId];
         require(owner != address(0));
+        return owner;
     }
+
     function _createGotchi(
         uint256 _gotchaId,
         uint256 _gotchoId,
