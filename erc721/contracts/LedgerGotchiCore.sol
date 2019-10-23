@@ -1,10 +1,10 @@
 pragma solidity ^0.5.0;
-import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol";
+//import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol";
 import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721Mintable.sol";
-import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+//import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
 //contract LedgerGotchiCore is ERC721Mintable, ERC721Full {
-contract LedgerGotchiCore is ERC721Mintable {
+contract LedgerGotchiCore {
 
   // Constants
   //string private _name = "LedgerGotchi";
@@ -13,6 +13,9 @@ contract LedgerGotchiCore is ERC721Mintable {
   // Events
   event Birth(address owner, uint256 gotchiId, uint256 gotchaId, uint256 gotchoId, uint256 genes);
   event Transfer(address from, address to, uint256 gotchiId);
+  event Approval(address from, address to, uint256 gotchiId);
+  event StartMint(address to, uint256 gotchiId);
+  event Ownership(address to, uint256 ownership);
 
   struct Gotchi {
         // Genes of gotchi
@@ -30,12 +33,31 @@ contract LedgerGotchiCore is ERC721Mintable {
    mapping (address => uint256) ownershipTokenCount;
    mapping (uint256 => address) public mingleAllowedToAddress;
    mapping (uint256 => address) public gotchiIndexToApproved;
-   //LedgerGotchiFactory public factory;
+   address _minter;
 
-   //constructor() public ERC721Mintable() ERC721Full(_name, _symbol) {
-   constructor() public ERC721Mintable() {
-
+   constructor() public {
+      _minter = msg.sender;
    }
+
+   function _exists(uint256 gotchiId) internal view returns (bool) {
+        address owner = gotchiIndexToOwner[gotchiId];
+        return owner != address(0);
+    }
+    function _mint(address to, uint256 gotchiId) internal {
+      require(msg.sender == _minter);
+      require(to != address(0), 'Gotchi needs a parent');
+      require(!_exists(gotchiId), "Gotchi already born");
+      _transfer(address(0), to, gotchiId);
+    }
+
+  function mint(address to, uint256 gotchiId) public returns (bool) {
+    emit StartMint(to, gotchiId);
+    uint256 tmp = ownershipTokenCount[to];
+    emit Ownership(to, ownershipTokenCount[to]);
+    _mint(to, gotchiId);
+    emit Ownership(to, ownershipTokenCount[to]);
+    return tmp != ownershipTokenCount[to];
+  }
 
   function _transfer(address _from, address _to, uint256 _gotchiId) internal {
           ownershipTokenCount[_to]++;
@@ -46,6 +68,7 @@ contract LedgerGotchiCore is ERC721Mintable {
               delete mingleAllowedToAddress[_gotchiId];
               delete gotchiIndexToApproved[_gotchiId];
           }
+          //gotchiIndexToApproved[_gotchiId] = _to;
           // Emit the transfer event.
           emit Transfer(_from, _to, _gotchiId);
     }
@@ -54,8 +77,8 @@ contract LedgerGotchiCore is ERC721Mintable {
       return gotchiIndexToOwner[_gotchiId] == _claimant;
     }
 
-  function _approvedFor(address _claimant, uint256 _gotchiId) internal view returns (bool) {
-      return gotchiIndexToApproved[_gotchiId] == _claimant;
+  function _approvedForOrOwner(address _claimant, uint256 _gotchiId) internal view returns (bool) {
+      return gotchiIndexToApproved[_gotchiId] == _claimant || _owns(_claimant, _gotchiId);
   }
 
   function _approve(uint256 _gotchiId, address _approved) internal {
@@ -102,11 +125,10 @@ contract LedgerGotchiCore is ERC721Mintable {
         public
     {
         require(_to != address(0));
-
         require(_to != address(this));
 
         // Check for approval and valid ownership
-        require(_approvedFor(msg.sender, _gotchiId));
+        require(_approvedForOrOwner(msg.sender, _gotchiId));
         require(_owns(_from, _gotchiId));
 
         // Reassign ownership (also clears pending approvals and emits Transfer event).
@@ -144,10 +166,8 @@ contract LedgerGotchiCore is ERC721Mintable {
     // external
     // view
     // returns (address owner)
-    function ownerOf(uint256 _gotchiId) public view returns (address owner)
-    {
+    function ownerOf(uint256 _gotchiId) public view returns (address owner) {
         owner = gotchiIndexToOwner[_gotchiId];
-
         require(owner != address(0));
     }
     function _createGotchi(
@@ -158,8 +178,7 @@ contract LedgerGotchiCore is ERC721Mintable {
         address _owner
     )
         internal
-        returns (uint)
-    {
+        returns (uint) {
         // Gotchi starts with the same cooldown as parent gen/2
         uint16 restIndex = uint16(_generation / 2);
         if (restIndex > 5) {
@@ -210,6 +229,27 @@ contract LedgerGotchiCore is ERC721Mintable {
     function toBytes(uint256 x) internal pure returns (bytes memory b) {
       b = new bytes(32);
       assembly { mstore(add(b, 32), x) }
+    }
+
+    function _isMingable(uint256 _gotchiId) internal view returns (bool) {
+      return mingleAllowedToAddress[_gotchiId] == address(0);
+    }
+
+    function _isAllowedToMingleWith(address _candidate, uint256 _gotchiId) internal view returns (bool) {
+      return mingleAllowedToAddress[_gotchiId] == _candidate;
+    }
+
+    function allowMingle(address allowed, uint256 gotchiId) public {
+      require(allowed != address(0));
+      require(_owns(msg.sender, gotchiId));
+      require(_isMingable(gotchiId));
+      mingleAllowedToAddress[gotchiId] = allowed;
+    }
+
+    function mingleWith(uint256 ownedGotchiId, uint256 tryingGotchiId) public returns (uint256) {
+      require(_owns(msg.sender, ownedGotchiId));
+      require(_isAllowedToMingleWith(msg.sender, tryingGotchiId));
+      return gotchiFactory(ownedGotchiId, tryingGotchiId);
     }
 
     function mingle(uint256 gotchaId, uint256 gotchoId) public view returns (uint256) {
@@ -265,13 +305,11 @@ contract LedgerGotchiCore is ERC721Mintable {
       return sliceUint(gotchiBytes, 0);
     }
 
-    function gotchiFactory(uint256 _gotchaId) external returns(uint256){
-      Gotchi storage gotcha = gotchies[_gotchaId];
+    function gotchiFactory(uint256 _gotchaId, uint256 _gotchoId) internal returns(uint256){
+        Gotchi storage gotcha = gotchies[_gotchaId];
+        Gotchi storage gotcho = gotchies[_gotchoId];
         // Babies not allowed to give birth
         require(gotcha.birthTime != 0);
-
-        uint256 gotchoId = gotcha.minglingWithId;
-        Gotchi storage gotcho = gotchies[gotchoId];
 
         // Determine the higher generation number of the two parents
         uint16 parentGen = gotcha.generation;
@@ -283,14 +321,14 @@ contract LedgerGotchiCore is ERC721Mintable {
         uint256 childGenes = mingle(gotcha.genes, gotcho.genes);
 
         // Gotchi is alive ... (crying)
-        address owner = gotchiIndexToOwner[_gotchaId];
-        uint256 kittenId = _createGotchi(_gotchaId, gotcha.minglingWithId, parentGen + 1, childGenes, owner);
+        address owner = (random() < 50) ? gotchiIndexToOwner[_gotchaId] : gotchiIndexToOwner[_gotchoId];
+        uint256 gotchiId = _createGotchi(_gotchaId, gotcha.minglingWithId, parentGen + 1, childGenes, owner);
 
         // what a relief
         delete gotcha.minglingWithId;
 
         // return the new kitten's ID
-        return kittenId;
+        return gotchiId;
     }
 
 }
