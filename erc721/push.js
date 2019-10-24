@@ -1,9 +1,6 @@
 require('dotenv').config()
 const EthereumTx = require('ethereumjs-tx')
 const {
-  contractAbi,
-  contractAddress,
-  contract,
   key,
   web3
 } = require('./config.js')
@@ -14,7 +11,7 @@ const getGasPrice = async () => {
   return gasPrice;
 }
 
-const transfer = async (addressFrom, addressTo, tokenId, method) => {
+const push = async (addressFrom, ercAddress, abiMethod) => {
 
   //Get nonce
   const nonce = await web3.eth.getTransactionCount(addressFrom)
@@ -22,27 +19,24 @@ const transfer = async (addressFrom, addressTo, tokenId, method) => {
 
   //TODO: use gas price
   const gasPrice = await getGasPrice();
-  const gasLimit = 1000*gasPrice
+  const gasLimit = 1000 * gasPrice
   const block = await web3.eth.getBlock('latest')
   const blockGasLimit = block.gasLimit
   console.log(`Got gas price ${gasPrice}`);
   //Get raw transaction
-  const getRawTransaction = (fromAddress, toAddress, erc721Id) => {
-    const methodABI = method === "approve" ? contract.methods.approve(toAddress, erc721Id).encodeABI() :
-    method === "transferFrom" ? contract.methods.transferFrom(fromAddress, toAddress, erc721Id).encodeABI() :
-    contract.methods.mint(toAddress, erc721Id).encodeABI();
+  const getRawTransaction = () => {
     return {
-        from: fromAddress,
+        from: addressFrom,
         nonce: web3.utils.toHex(nonce),
         gasPrice: web3.utils.toHex(20000000000),
         gasLimit: web3.utils.toHex(2000000),
-        to: contractAddress,
+        to: ercAddress,
         value: "0x0",
-        data: methodABI,
+        data: abiMethod,
         chainId: 0x03
     };
   }
-  const rawTransaction = getRawTransaction(addressFrom, addressTo, tokenId)
+  const rawTransaction = getRawTransaction()
   console.log(`Got raw transaction : ${rawTransaction}`);
 
   //Sign transaction
@@ -69,4 +63,4 @@ const transfer = async (addressFrom, addressTo, tokenId, method) => {
   console.log(`Sign raw transaction`);
   signTransaction(rawTransaction);
 }
-module.exports = transfer;
+module.exports = push;

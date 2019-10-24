@@ -1,9 +1,10 @@
 const {
   addressTo,
   addressFrom,
-  contract
+  contract,
+  contractAddress
 } = require('./config.js')
-const transfer = require('./transfer.js');
+const push = require('./push.js');
 const getRandomInt = max => {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -11,13 +12,6 @@ const getRandomInt = max => {
 
 async function mintTo(address) {
   const tokenId = getRandomInt(Date.now());
-  const result = await transfer(addressFrom, address, tokenId, "mint");
-  console.log(result);
-  if (result) {
-      console.log(`Token ${tokenId} mint to ${address}`);
-  } else {
-    console.log(`Failed to mint token ${tokenId} to ${address}`);
-  }
-  return result;
+  await push(addressFrom, contractAddress, contract.methods.mint(address, tokenId).encodeABI());
 }
-mintTo(addressFrom);
+mintTo(addressTo);
