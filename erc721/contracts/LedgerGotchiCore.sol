@@ -7,8 +7,8 @@ import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.s
 contract LedgerGotchiCore is ERC721 {
 
   // Constants
-  //string private _name = "LedgerGotchi";
-  //string private _symbol = "LG";
+  string private _name = "LedgerGotchi";
+  string private _symbol = "LG";
 
   // Events
   event Birth(address owner, uint256 gotchiId, uint256 gotchaId, uint256 gotchoId, uint256 genes);
